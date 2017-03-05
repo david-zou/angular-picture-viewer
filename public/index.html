@@ -32,16 +32,16 @@
         </table>
       </div>
       <div class="col-xs-8">
-        <div ng-model="imgModel">
+        <div ng-model="imgModel" class="metadata">
           <img class="image pull-right" ng-src="{{imgURL}}">
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-6"></div>
+        <div class="col-xs-6 metadata"></div>
         <div class="col-xs-2 metadata">{{imgTitle}}</div>
         <div class="col-xs-2 metadata">{{imgRating}} out of 5</div>
-        <div class="col-xs-2">
-          <select class="form-control" name="Rating" ng-model="data.ratingSelection" ng-change="changeRating(data.ratingSelection)">
+        <div class="col-xs-2 metadata">
+          <select name="Rating" ng-model="data.ratingSelection" ng-change="changeRating(data.ratingSelection)">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

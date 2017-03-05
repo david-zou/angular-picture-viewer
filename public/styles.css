@@ -1,8 +1,7 @@
 img {
-  height: 70%;
-  width: 70%;
-  /*display: flex;
-  justify-content: flex-end;*/
+  height: 400px;
+  width: 600px;
+  align: left;
 }
 
 body {
@@ -17,8 +16,20 @@ button {
 
 .metadata {
   text-align: center;
+  align: center;
 }
 
-select {
-
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
 }

@@ -4,19 +4,19 @@ angular.module('pictureModule', []).controller('pictureCtrl', function($scope) {
   $scope.testImage1 = {
     id: 0,
     title: 'Test Signal',
-    rating: 5,
+    rating: 0,
     url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/SMPTE_Color_Bars.svg/329px-SMPTE_Color_Bars.svg.png'
   };
   $scope.testImage2 = {
     id: 1,
     title: 'Workshop Cafe',
-    rating: 5,
+    rating: 0,
     url: 'https://workfrom-workfrominc.netdna-ssl.com/files/2016/01/101081477_ifQbFxU00h4F7hcjmQcMFkCr8Csk3OrgBmPJ7faYXYM.jpg'
   };
   $scope.testImage3 = {
     id: 2,
     title: 'Test Image',
-    rating: 5,
+    rating: 0,
     url: 'http://engineeringtutorial.com/wp-content/uploads/2016/07/Transformer-Open-and-Short-Circuit-Tests.png'
   };
   
@@ -24,6 +24,7 @@ angular.module('pictureModule', []).controller('pictureCtrl', function($scope) {
   $scope.collection = [$scope.testImage1, $scope.testImage2, $scope.testImage3]; // array of objects, each object will have a title, rating and url property
   $scope.favorites = [];
   $scope.currentImg = $scope.collection[0];
+  $scope.currentId = 0;
   $scope.imgURL = $scope.collection[0].url;
   $scope.imgTitle = $scope.collection[0].title;
   $scope.imgRating = $scope.collection[0].rating;
@@ -48,6 +49,7 @@ angular.module('pictureModule', []).controller('pictureCtrl', function($scope) {
   $scope.getImage = function(id) {
     // query the database and get the URL of the clicked table row
     console.log('image id clicked:', id);
+    $scope.currentId = id;
     $scope.currentImg = $scope.collection[id];
     $scope.imgTitle = $scope.collection[id].title;
     $scope.imgRating = $scope.collection[id].rating;
@@ -56,6 +58,7 @@ angular.module('pictureModule', []).controller('pictureCtrl', function($scope) {
 
   $scope.changeRating = function(rating) {
     console.log('Rating:', rating);
+    $scope.collection[$scope.currentId].rating = rating;
     $scope.imgRating = rating;
     $scope.changeFavorites(rating);
   }
@@ -67,9 +70,11 @@ angular.module('pictureModule', []).controller('pictureCtrl', function($scope) {
 
   $scope.changeFavorites = function(rating) {
     if (rating >= 4) {
-      $scope.favorites.push($scope.currentImg);
+      $scope.favorites.push($scope.collection[$scope.currentId]);
     } else {
-      $scope.favorites.splice($scope.collection.indexOf($scope.currentImg), 1);
+      if ($scope.favorites.indexOf($scope.collection[$scope.currentId]) >= 0) {
+        $scope.favorites.splice($scope.favorites.indexOf($scope.collection[$scope.currentId]), 1);
+      }
     }  
   }
 
