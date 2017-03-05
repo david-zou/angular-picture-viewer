@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Picture Viewer</title>
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="./controller.js"></script>
+  <script src="./services.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body ng-app="pictureModule">
+<div class="row">
+  <div ng-controller="pictureCtrl">
+    <h1>Picture Viewer</h1>
+    <br>
+    <form ng-submit="addURL(titleText, urlText)">
+      Title: <input type="text" ng-model="titleText" required ng-click="clearText('titleText')"/>
+      Url: <input type="text" ng-model="urlText" required ng-click="clearText('urlText')"/>
+      <input type="submit" id="submit" value="Save Image"/>
+    </form>
+    <br>
+      <div class="col-xs-4">
+        <table class="table table-bordered table-hover table-responsive">
+          <tr><th>Images</th></tr>
+          <tr ng-repeat="image in collection" ng-click="getImage(image.id)"><td>{{image.title}}</td></tr>
+        </table>
+        <table class="table table-bordered table-hover table-responsive">
+          <tr><th>Favorites</th></tr>
+          <tr ng-repeat="image in favorites" ng-click="getImage(image.id)"><td>{{image.title}}</td></tr>
+        </table>
+      </div>
+      <div class="col-xs-8">
+        <div ng-model="imgModel">
+          <img class="image pull-right" ng-src="{{imgURL}}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6"></div>
+        <div class="col-xs-2 metadata">{{imgTitle}}</div>
+        <div class="col-xs-2 metadata">{{imgRating}} out of 5</div>
+        <div class="col-xs-2">
+          <select class="form-control" name="Rating" ng-model="data.ratingSelection" ng-change="changeRating(data.ratingSelection)">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
