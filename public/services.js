@@ -1,23 +1,28 @@
 angular.module('pictureServices', []).factory('Images', function($http) {
   
-  var addOne = function(url) {
+  var addOne = function(id, title, url) {
     return $http({
       method: 'POST',
-      url: '/',
-      data: {url: url}
+      url: '/image/post',
+      data: {
+        id: id,
+        title: title,
+        rating: 0,
+        url: url
+      }
     }).then(function(resp) {
       return resp;
     }).catch(function(error) {
       console.error(error);
-    });;
+    });
   };
 
-  var getAll = function() {
+  var getAll = function(cb) {
     return $http({
       method: 'GET',
-      url: '/',
+      url: '/image/get'
     }).then(function(resp) {
-      return resp.data;
+      cb(resp.data);
     });
   };
 

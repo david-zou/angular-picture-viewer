@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/pictureviewer');
 mongoose.connection.once('open', function() {
   console.log('Connection to DB successful.');
@@ -9,6 +10,7 @@ mongoose.connection.on('error', function() {
 var Schema = mongoose.Schema;
 
 var pictureSchema = new Schema({
+  id: Number,
   title: String,
   rating: Number,
   url: String
@@ -16,4 +18,4 @@ var pictureSchema = new Schema({
 
 var Picture = mongoose.model('Picture', pictureSchema);
 
-module.exports.Picture = Picture;
+module.exports = Picture;

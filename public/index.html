@@ -24,15 +24,15 @@
       <div class="col-xs-4">
         <table class="table table-bordered table-hover table-responsive">
           <tr><th>Images</th></tr>
-          <tr ng-repeat="image in collection" ng-click="getImage(image.id)"><td>{{image.title}}</td></tr>
+          <tr ng-repeat="image in collection track by $index" ng-click="renderImage($index)"><td>{{image.title}}</td></tr>
         </table>
         <table class="table table-bordered table-hover table-responsive">
           <tr><th>Favorites</th></tr>
-          <tr ng-repeat="image in favorites" ng-click="getImage(image.id)"><td>{{image.title}}</td></tr>
+          <tr ng-repeat="image in favorites track by $index" ng-click="renderFavorite($index)"><td>{{image.title}}</td></tr>
         </table>
       </div>
       <div class="col-xs-8">
-        <div ng-model="imgModel" class="metadata">
+        <div class="metadata">
           <img class="image pull-right" ng-src="{{imgURL}}">
         </div>
       </div>
@@ -40,14 +40,12 @@
         <div class="col-xs-6 metadata"></div>
         <div class="col-xs-2 metadata">{{imgTitle}}</div>
         <div class="col-xs-2 metadata">{{imgRating}} out of 5</div>
-        <div class="col-xs-2 metadata">
-          <select name="Rating" ng-model="data.ratingSelection" ng-change="changeRating(data.ratingSelection)">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+        <div class="col-xs-2 metadata rating">
+          <span ng-click="changeRating(5)">{{stars[4]}}</span>
+          <span ng-click="changeRating(4)">{{stars[3]}}</span>
+          <span ng-click="changeRating(3)">{{stars[2]}}</span>
+          <span ng-click="changeRating(2)">{{stars[1]}}</span>
+          <span ng-click="changeRating(1)">{{stars[0]}}</span>
         </div>
       </div>
     </div>
